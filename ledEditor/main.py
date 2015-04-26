@@ -200,14 +200,36 @@ class LedEditorFrame(wx.Frame):
 		if(selectedIndex <> wx.NOT_FOUND and selectedIndex > 0):
 			self.removeTimeGroupInfo(selectedIndex-1)
 			
-	#called when clone button is clicked
+	#called when clone button is clicked (copied from add time button)
 	def cloneTimeBtnClick(self,event):
 		selectedIndex = self.timeStampListbox.GetSelection()
-		if(selectedIndex <> wx.NOT_FOUND and selectedIndex > 0):
-			self.removeTimeGroupInfo(selectedIndex-1)
+		if(selectedIndex == wx.NOT_FOUND):
+			selectedIndex = 0;
+
+		#get time val and make sure it's valid
+		#currently only supports minutes and seconds
+		timeVal = self.timeEdit.GetValue()
+		if( self.VerifyTime(timeVal) == False):
+			wx.MessageBox("Invalid time. Valid time ex: 52:01 001ms")
+			return
+		
+		
+		#find the appropriate spot for the time value in the list
+		#splits keeps splitting time list in half, and repeats
+		#For the line below we don't care about the 1st [New Entry] 
+		# field
+		timeStampLength = len(self.timeStamps) -1;
+		insertIndex = Utils.findInsertIndex(
+			self.timeStamps[1:len(self.timeStamps)],timeVal)
+	
+		#check if time exists already
+		if(insertIndex < 0):
+			wx.MessageBox("Time value already exists.")
+			return
+	
+		self.insertTimeGroup(insertIndex,EffectGroup(GlobalSettings.LedCount,timeVal))
 			
-			
-			
+				
 	
 	def removeTimeGroupInfo(self,effectGroupIndex):
 		#remove the time group from the listing
