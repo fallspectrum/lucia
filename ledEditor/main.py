@@ -49,10 +49,10 @@ class LedEditorFrame(wx.Frame):
 		self.timeStampListbox.Bind(wx.EVT_LISTBOX,self.timeGroupSelect)
 
 		#time editbox
-		self.timeEdit = wx.TextCtrl(self,id=self.EDIT_TIME, pos=(140,30), size = (60,25))
+		self.timeEdit = wx.TextCtrl(self,id=self.EDIT_TIME, pos=(140,30), size = (80,25))
 		
 		#add time btn
-		self.addTimeBtn = wx.Button(self,id=self.BTN_TIMEADD,pos=(140,60), size = (60,25),label="add");
+		self.addTimeBtn = wx.Button(self,id=self.BTN_TIMEADD,pos=(140,60), size = (70,25),label="add");
 		self.addTimeBtn.Bind(wx.EVT_BUTTON,self.addTimeBtnClick)
 
 		#edit time btn
