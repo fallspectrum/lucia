@@ -1,0 +1,6 @@
+Pending...
+
+This application uses sdl. If you get an error on linux make sure
+SDL supports the your sound system (ex: libsdl1.2debian-alsa 
+supports alsa)
+
