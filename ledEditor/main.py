@@ -45,31 +45,36 @@ class LedEditorFrame(wx.Frame):
 
 		#add list box to hold time stamps
 		self.timeStamps = ['[New Time]']
-		self.timeStampListbox = wx.ListBox(self,size = (170,430),choices=self.timeStamps,style=wx.LB_SINGLE)
+		self.timeStampListbox = wx.ListBox(self, pos=(20,0), size = (100,630),choices=self.timeStamps,style=wx.LB_SINGLE)
 		self.timeStampListbox.Bind(wx.EVT_LISTBOX,self.timeGroupSelect)
 
 		#time editbox
-		self.timeEdit = wx.TextCtrl(self,id=self.EDIT_TIME, pos=(0,440), size = (130,25))
+		self.timeEdit = wx.TextCtrl(self,id=self.EDIT_TIME, pos=(140,30), size = (60,25))
 		
 		#add time btn
-		self.addTimeBtn = wx.Button(self,id=self.BTN_TIMEADD,pos=(0,480), size = (60,25),label="add");
+		self.addTimeBtn = wx.Button(self,id=self.BTN_TIMEADD,pos=(140,60), size = (60,25),label="add");
 		self.addTimeBtn.Bind(wx.EVT_BUTTON,self.addTimeBtnClick)
 
 		#edit time btn
-		self.editTimeBtn = wx.Button(self,id=self.BTN_TIMEAPPLY,pos=(70,480), size = (60,25),label="edit");
+		self.editTimeBtn = wx.Button(self,id=self.BTN_TIMEAPPLY,pos=(140,90), size = (60,25),label="edit");
 		self.editTimeBtn.Bind(wx.EVT_BUTTON,self.editTimeBtnClick)	
 		
+		#clone time btn
+		self.cloneTimeBtn = wx.Button(self,id=self.BTN_TIMEAPPLY,pos=(140,120), size = (60,30),label="clone");
+		self.editTimeBtn.Bind(wx.EVT_BUTTON,self.deleteTimeBtnClick)
+		
 		#delete time btn
-		self.editTimeBtn = wx.Button(self,id=self.BTN_TIMEAPPLY,pos=(0,510), size = (130,25),label="delete");
-		self.editTimeBtn.Bind(wx.EVT_BUTTON,self.deleteTimeBtnClick)	
+		self.editTimeBtn = wx.Button(self,id=self.BTN_TIMEAPPLY,pos=(140,175), size = (60,30),label="delete");
+		self.editTimeBtn.Bind(wx.EVT_BUTTON,self.deleteTimeBtnClick)
+					
 		
 		#dropdown for led number selected
 		ledNumbers = []
-		self.ledNumbers = wx.ListBox(self,choices = ledNumbers, pos=(200,0),size=(200,275))
+		self.ledNumbers = wx.ListBox(self,choices = ledNumbers, pos=(220,0),size=(200,200))
 		self.ledNumbers.Bind(wx.EVT_LISTBOX,self.ledSelected);
 
 		#create a panel for the effect attributes
-		self.effectAttributesPanel = wx.PyScrolledWindow(self,wx.ID_ANY,pos = (450,0), size=(320,550))
+		self.effectAttributesPanel = wx.PyScrolledWindow(self,wx.ID_ANY,pos = (440,0), size=(320,630))
 		self.effectAttributesPanel.SetScrollbars(0,55,0,55);
 		self.effectAttributesPanel.Hide()
 		self.effectAttributesPanel.EnableScrolling(False,True);
@@ -104,7 +109,7 @@ class LedEditorFrame(wx.Frame):
 			return
 		
 		
-		#find the appropiate spot for the time value in the list
+		#find the appropriate spot for the time value in the list
 		#splits keeps splitting time list in half, and repeats
 		#For the line below we don't care about the 1st [New Entry] 
 		# field
