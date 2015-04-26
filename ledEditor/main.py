@@ -61,7 +61,7 @@ class LedEditorFrame(wx.Frame):
 		
 		#clone time btn
 		self.cloneTimeBtn = wx.Button(self,id=self.BTN_TIMEAPPLY,pos=(140,120), size = (60,30),label="clone");
-		self.editTimeBtn.Bind(wx.EVT_BUTTON,self.deleteTimeBtnClick)
+		self.editTimeBtn.Bind(wx.EVT_BUTTON,self.cloneTimeBtnClick)
 		
 		#delete time btn
 		self.editTimeBtn = wx.Button(self,id=self.BTN_TIMEAPPLY,pos=(140,175), size = (60,30),label="delete");
@@ -194,11 +194,20 @@ class LedEditorFrame(wx.Frame):
 
 		print " "
 	
-	#called when delete time button is clicked
+	#called when delete button is clicked
 	def deleteTimeBtnClick(self,event):
 		selectedIndex = self.timeStampListbox.GetSelection()
 		if(selectedIndex <> wx.NOT_FOUND and selectedIndex > 0):
 			self.removeTimeGroupInfo(selectedIndex-1)
+			
+	#called when clone button is clicked
+	def cloneTimeBtnClick(self,event):
+		selectedIndex = self.timeStampListbox.GetSelection()
+		if(selectedIndex <> wx.NOT_FOUND and selectedIndex > 0):
+			self.removeTimeGroupInfo(selectedIndex-1)
+			
+			
+			
 	
 	def removeTimeGroupInfo(self,effectGroupIndex):
 		#remove the time group from the listing
@@ -241,7 +250,7 @@ class LedEditorFrame(wx.Frame):
 		if(self.aknowledgeEvent):
 			self.setSelectedLedInfo()
 			
-			print "Selceted led index: " + str(self.currentSelectedLed)
+			print "Selected led index: " + str(self.currentSelectedLed)
 			#effect drop down list to the right value
 			tempIndex = EffectDescriptions.getEffectIndexById(self.currentEffectGroup.getLedEffect(self.currentSelectedLed)[EffectGroup.INDEX_EFFECT_NUMBER])
 			self.effectNamesCombobox.SetSelection(tempIndex)
@@ -290,7 +299,7 @@ class LedEditorFrame(wx.Frame):
 			effectDataLen = len(ledEffectData)
 			if(effectDataLen > 0):
 				#make sure that the selected effect is the same
-				#effect stroed for the led
+				#effect stored for the led
 				if(effectNum == ledEffectInfo[EffectGroup.INDEX_EFFECT_NUMBER]):
 					hasEffectData = True
 		if(hasEffectData == False):
@@ -298,7 +307,7 @@ class LedEditorFrame(wx.Frame):
 
 		#display controls for each attributes
 		#if data is saved for led, use the data
-		#TODO this does not handle if a paramter
+		#TODO this does not handle if a parameter
 		#is added or deleted
 		for index in range (0,attribCount):
 			control = None
@@ -310,13 +319,13 @@ class LedEditorFrame(wx.Frame):
 
 			#TODO we update the control information whenever a 
 			#field is update. we can save processing time by
-			#adding a commit button, or something similiar
+			#adding a commit button, or something similar
 
 			#Create the right control for the value that is going to be changed
 			attributeType = curAttribute[EffectDescriptions.INDEX_TYPE]
 			if(attributeType == EffectDescriptions.VAR_COLOR):
 				#colorPicker
-				control = wx.ColourPickerCtrl(self.effectAttributesPanel, pos = (150,yPos), size=(50,50))
+				control = wx.ColourPickerCtrl(self.effectAttributesPanel, pos = (150,yPos), size=(100,50))
 				if (hasEffectData == True): 
 					control.SetColour(appliedEffectData)
 				control.Bind(wx.EVT_COLOURPICKER_CHANGED,self.effectAttribChange)
@@ -324,7 +333,7 @@ class LedEditorFrame(wx.Frame):
 				  attributeType == EffectDescriptions.VAR_WORD or
 				  attributeType == EffectDescriptions.VAR_DWORD):
 				#edit box
-				control = wx.TextCtrl(self.effectAttributesPanel, pos = (150,yPos), size=(100,25))
+				control = wx.TextCtrl(self.effectAttributesPanel, pos = (150,yPos), size=(30,25))
 				control.Bind(wx.EVT_TEXT,self.effectAttribChange)
 				if (hasEffectData == True):
 					control.SetValue(appliedEffectData)	
@@ -333,10 +342,10 @@ class LedEditorFrame(wx.Frame):
 				
 			#don't create a control for a hidden value
 			elif(attributeType == EffectDescriptions.VAR_HIDDEN_BYTE):
-				print "Hidden attrib detected, not creating controls."
+				print "Hidden attribute detected, not creating controls."
 				continue
 			else:
-				print "Unkown control type detected!"
+				print "Unknown control type detected!"
 			
 			
 			#We check to see if we create a contol first, if so then we
@@ -379,7 +388,7 @@ class LedEditorFrame(wx.Frame):
 
 		i = 0
 		controlIndex=0
-		print "attribu controls count: " + str(len(self.lastAttributeControls))
+		print "attribute controls count: " + str(len(self.lastAttributeControls))
 		print self.lastAttributeControls
 		while i < reqAttributesRange:
 			
@@ -399,7 +408,7 @@ class LedEditorFrame(wx.Frame):
 			elif(attribType == EffectDescriptions.VAR_BYTE or attribType == EffectDescriptions.VAR_WORD):
 				effectData.append(tempControl.GetValue())
 			else:
-				print "Invalid effect selceted somehow!"
+				print "Invalid effect selected somehow!"
 			i += 1
 			controlIndex += 1
 		self.currentEffectGroup.setLedEffect(self.currentSelectedLed,effectDescription['id'],effectData)
@@ -445,7 +454,7 @@ class LedEditorFrame(wx.Frame):
 
 	def exportFileEvent(self,event):
 		generateFile("../avrCode/song_instructions.c",GlobalSettings.LedCount,self.effectGroups)
-		wx.MessageBox("Song exported. Please compile avr code and flash.");
+		wx.MessageBox("Song exported. Please build AVR code, then flash the HEX.");
 
 class LedEditorApp(wx.App):
 	def OnInit(self):

@@ -88,7 +88,7 @@ class Utils:
 	#Inserts the given value in the middle of the list
 	#Error occurs when there are duplicate values
 	#returns index on success, -1 on error
-	#TODO specifiy duplicate value  handeling method
+	#TODO specify duplicate value handling method
 	@staticmethod
 	def findInsertIndex(aList,aVal):
 		listLength = len(aList);
