@@ -10,20 +10,17 @@ from myutils import Utils
 
 class LedEditorFrame(wx.Frame):
 	def __init__(self,parent,id,title):
-		
+
 		wx.Frame.__init__(self,parent,id,title,wx.DefaultPosition,(820,700))
-		
+
 		self.curFileName=""
 		self.EDIT_TIME=0;
 		self.BTN_TIMEADD=1;
 		self.BTN_TIMEAPPLY=2;
-		
 		self.lastAttributeControls = []
 
 		#holds list of effect groups
 		self.effectGroups = []
-		
-
 		self.currentSelectedLed = None;
 		self.currentEffectGroup = None;
 		self.aknowledgeEvent = True
@@ -43,6 +40,9 @@ class LedEditorFrame(wx.Frame):
 		self.Bind(wx.EVT_MENU, self.saveFileAsEvent, id=103)
 		self.Bind(wx.EVT_MENU, self.exportFileEvent, id=104)
 
+
+
+
 		#add list box to hold time stamps
 		self.timeStamps = ['[New Time]']
 		self.timeStampListbox = wx.ListBox(self, pos=(20,0), size = (100,630),choices=self.timeStamps,style=wx.LB_SINGLE)
@@ -50,24 +50,24 @@ class LedEditorFrame(wx.Frame):
 
 		#time editbox
 		self.timeEdit = wx.TextCtrl(self,id=self.EDIT_TIME, pos=(140,30), size = (80,25))
-		
+
 		#add time btn
 		self.addTimeBtn = wx.Button(self,id=self.BTN_TIMEADD,pos=(140,60), size = (70,25),label="add");
 		self.addTimeBtn.Bind(wx.EVT_BUTTON,self.addTimeBtnClick)
 
 		#edit time btn
 		self.editTimeBtn = wx.Button(self,id=self.BTN_TIMEAPPLY,pos=(140,90), size = (60,25),label="edit");
-		self.editTimeBtn.Bind(wx.EVT_BUTTON,self.editTimeBtnClick)	
-		
+		self.editTimeBtn.Bind(wx.EVT_BUTTON,self.editTimeBtnClick)
+
 		#clone time btn
-		self.cloneTimeBtn = wx.Button(self,id=self.BTN_TIMEAPPLY,pos=(140,120), size = (60,30),label="clone");
-		self.editTimeBtn.Bind(wx.EVT_BUTTON,self.cloneTimeBtnClick)
-		
+		self.cloneTimeBtn = wx.Button(self,id=self.BTN_TIMEADD,pos=(140,120), size = (60,30),label="clone");
+		self.cloneTimeBtn.Bind(wx.EVT_BUTTON,self.cloneTimeBtnClick)
+
 		#delete time btn
 		self.editTimeBtn = wx.Button(self,id=self.BTN_TIMEAPPLY,pos=(140,175), size = (60,30),label="delete");
 		self.editTimeBtn.Bind(wx.EVT_BUTTON,self.deleteTimeBtnClick)
-					
-		
+
+
 		#dropdown for led number selected
 		ledNumbers = []
 		self.ledNumbers = wx.ListBox(self,choices = ledNumbers, pos=(220,0),size=(200,200))
@@ -84,8 +84,8 @@ class LedEditorFrame(wx.Frame):
 		for effect in EffectDescriptions.Effects:
 			effectNames.append(effect["name"]);
 		self.effectNamesCombobox = wx.ComboBox(self.effectAttributesPanel, choices=effectNames, pos=(0,0), size =(300,25))
-		self.effectNamesCombobox.Bind(wx.EVT_COMBOBOX,self.effectSelected)	
-		
+		self.effectNamesCombobox.Bind(wx.EVT_COMBOBOX,self.effectSelected)
+
 		'''
 		#box displaying color
 		self.colorPreview = wx.Panel(self,-1,wx.Point(0,300))
@@ -107,24 +107,24 @@ class LedEditorFrame(wx.Frame):
 		if( self.VerifyTime(timeVal) == False):
 			wx.MessageBox("Invalid time. Valid time ex: 52:01 001ms")
 			return
-		
-		
+
+
 		#find the appropriate spot for the time value in the list
 		#splits keeps splitting time list in half, and repeats
-		#For the line below we don't care about the 1st [New Entry] 
-		# field
+		#For the line below we don't care about the 1st [New Entry]
+		#field
 		timeStampLength = len(self.timeStamps) -1;
 		insertIndex = Utils.findInsertIndex(
 			self.timeStamps[1:len(self.timeStamps)],timeVal)
-	
+
 		#check if time exists already
 		if(insertIndex < 0):
 			wx.MessageBox("Time value already exists.")
 			return
-	
+
 		self.insertTimeGroup(insertIndex,EffectGroup(GlobalSettings.LedCount,timeVal))
 
-			
+
 	def insertTimeGroup(self,insertIndex,timeGroupToInsert):
 		#insert time into time stamps array
 		headList = self.timeStamps[0:insertIndex+1]
@@ -133,7 +133,7 @@ class LedEditorFrame(wx.Frame):
 
 
 		self.timeStampListbox.Insert(timeGroupToInsert.m_time,insertIndex+1)
-		
+
 		#create a new EffectGroup and tie it to the time
 		headList = self.effectGroups[0:insertIndex]
 		tailList = self.effectGroups[insertIndex:len(self.effectGroups)]
@@ -153,7 +153,7 @@ class LedEditorFrame(wx.Frame):
 		self.currentSelectedLed = None
 		self.ledNumbers.SetSelection(wx.NOT_FOUND)
 		self.effectAttributesPanel.Hide()
-	
+
 	#handles edit button click for time edit
 	def editTimeBtnClick(self,event):
 
@@ -168,7 +168,7 @@ class LedEditorFrame(wx.Frame):
 		if(self.VerifyTime(timeVal) == False):
 			wx.MessageBox("Invalid time. Valid time ex: 52:01 001ms")
 			return
-		
+
 		#check if the time stamp exists
 		timeStampLength = len(self.timeStamps) -1;
 		insertIndex = Utils.findInsertIndex(
@@ -176,16 +176,16 @@ class LedEditorFrame(wx.Frame):
 		if(insertIndex < 0):
 			wx.MessageBox("Time value already exists.")
 			return
-	
+
 		#get the time group that is going to be moved
 		effectGroupToKeep = self.effectGroups[selectedIndex - 1]
 
 		self.removeTimeGroupInfo(selectedIndex-1)
-		
-		#get the new position to add the timestamp to 
+
+		#get the new position to add the timestamp to
 		insertIndex = Utils.findInsertIndex(
 			self.timeStamps[1:len(self.timeStamps)],timeVal)
-	
+
 		effectGroupToKeep.setTime(timeVal)
 		self.insertTimeGroup(insertIndex,effectGroupToKeep)
 
@@ -193,13 +193,13 @@ class LedEditorFrame(wx.Frame):
 			print i.m_time
 
 		print " "
-	
+
 	#called when delete button is clicked
 	def deleteTimeBtnClick(self,event):
 		selectedIndex = self.timeStampListbox.GetSelection()
 		if(selectedIndex <> wx.NOT_FOUND and selectedIndex > 0):
 			self.removeTimeGroupInfo(selectedIndex-1)
-			
+
 	#called when clone button is clicked (copied from add time button)
 	def cloneTimeBtnClick(self,event):
 		selectedIndex = self.timeStampListbox.GetSelection()
@@ -212,25 +212,25 @@ class LedEditorFrame(wx.Frame):
 		if( self.VerifyTime(timeVal) == False):
 			wx.MessageBox("Invalid time. Valid time ex: 52:01 001ms")
 			return
-		
-		
+
+
 		#find the appropriate spot for the time value in the list
 		#splits keeps splitting time list in half, and repeats
-		#For the line below we don't care about the 1st [New Entry] 
+		#For the line below we don't care about the 1st [New Entry]
 		# field
 		timeStampLength = len(self.timeStamps) -1;
 		insertIndex = Utils.findInsertIndex(
 			self.timeStamps[1:len(self.timeStamps)],timeVal)
-	
+
 		#check if time exists already
 		if(insertIndex < 0):
 			wx.MessageBox("Time value already exists.")
 			return
-	
+
 		self.insertTimeGroup(insertIndex,EffectGroup(GlobalSettings.LedCount,timeVal))
-			
-				
-	
+
+
+
 	def removeTimeGroupInfo(self,effectGroupIndex):
 		#remove the time group from the listing
 		timeStampLength = len(self.timeStamps)
@@ -238,18 +238,18 @@ class LedEditorFrame(wx.Frame):
 		self.timeStamps = self.timeStamps[0:effectGroupIndex+1] + self.timeStamps[effectGroupIndex+2:timeStampLength]
 		self.effectGroups = self.effectGroups[0:effectGroupIndex] + self.effectGroups[effectGroupIndex+1:timeStampLength-1]
 
-	
+
 	#Verifies time for time stamp list box is correct
 	def VerifyTime(self,timeVal):
 		matchVal = re.match("[0-9]{1,2}:[0-5][0-9] [0-9]{2,2}0ms",timeVal);
-		if(matchVal == None): 
+		if(matchVal == None):
 			return False
 		return True
 
 	#given a selected led effect group the led effect group
 	#window is populated with the name of the effect for each led
 	def populateEffectGroupListBox(self,effectGroup,numberOfLeds):
-		
+
 		#Calling clear triggers ledSelected
 		#we got to keep track of old index
 		curSelectedIndex = self.ledNumbers.GetSelection()
@@ -257,7 +257,7 @@ class LedEditorFrame(wx.Frame):
 		self.ledNumbers.Clear()
 		self.aknowledgeEvent= True
 		for i in range(0,numberOfLeds):
-			self.ledNumbers.Append("Led " + str(i) + ": " + 
+			self.ledNumbers.Append("Led " + str(i) + ": " +
 				EffectDescriptions.getEffectDescriptionById(
 					effectGroup.getLedEffect(i)[EffectGroup.INDEX_EFFECT_NUMBER])["name"])
 		if(curSelectedIndex <> wx.NOT_FOUND):
@@ -265,20 +265,20 @@ class LedEditorFrame(wx.Frame):
 		else:
 			self.currentSelectedLed = None
 		self.ledNumbers.SetSelection(curSelectedIndex)
-	
+
 	#called when a led number is selected
 	#from the list.
 	def ledSelected(self,event):
 		if(self.aknowledgeEvent):
 			self.setSelectedLedInfo()
-			
+
 			print "Selected led index: " + str(self.currentSelectedLed)
 			#effect drop down list to the right value
 			tempIndex = EffectDescriptions.getEffectIndexById(self.currentEffectGroup.getLedEffect(self.currentSelectedLed)[EffectGroup.INDEX_EFFECT_NUMBER])
 			self.effectNamesCombobox.SetSelection(tempIndex)
 			self.effectSelected(None)
 			self.effectAttributesPanel.Show()
-	
+
 	#sets the current selected led index for the current group
 	#and sets the correct effect name selection for the led
 	def setSelectedLedInfo(self):
@@ -296,25 +296,25 @@ class LedEditorFrame(wx.Frame):
 		for i in self.lastAttributeControls:
 			i.Destroy();
 		self.lastAttributeControls = []
-		
+
 		#get the index of the selected effect name
 		selectedIndex = self.effectNamesCombobox.GetCurrentSelection()
 
 		#get the effect number selected
-		effectNum =EffectDescriptions.Effects[selectedIndex]['id']	
+		effectNum =EffectDescriptions.Effects[selectedIndex]['id']
 
 		#get reference to effect description
 		effectDescription = EffectDescriptions.Effects[selectedIndex]
 
 		reqAttributes = effectDescription["reqAttributes"]
-		
+
 		ledEffectInfo = self.currentEffectGroup.getLedEffect(self.currentSelectedLed)
 		ledEffectData = ledEffectInfo[EffectGroup.INDEX_EFFECT_DATA]
 
 
 		yPos = 50;
-	
-		
+
+
 		attribCount = len(reqAttributes)
 		hasEffectData = False
 		if(ledEffectData <> None):
@@ -333,13 +333,13 @@ class LedEditorFrame(wx.Frame):
 		#is added or deleted
 		for index in range (0,attribCount):
 			control = None
-			curAttribute = reqAttributes[index]	
+			curAttribute = reqAttributes[index]
 			appliedEffectData = None
 			if(hasEffectData == True):
 				appliedEffectData = ledEffectData[index]
-				
 
-			#TODO we update the control information whenever a 
+
+			#TODO we update the control information whenever a
 			#field is update. we can save processing time by
 			#adding a commit button, or something similar
 
@@ -348,7 +348,7 @@ class LedEditorFrame(wx.Frame):
 			if(attributeType == EffectDescriptions.VAR_COLOR):
 				#colorPicker
 				control = wx.ColourPickerCtrl(self.effectAttributesPanel, pos = (150,yPos), size=(100,50))
-				if (hasEffectData == True): 
+				if (hasEffectData == True):
 					control.SetColour(appliedEffectData)
 				control.Bind(wx.EVT_COLOURPICKER_CHANGED,self.effectAttribChange)
 			elif( attributeType == EffectDescriptions.VAR_BYTE or
@@ -358,28 +358,28 @@ class LedEditorFrame(wx.Frame):
 				control = wx.TextCtrl(self.effectAttributesPanel, pos = (150,yPos), size=(30,25))
 				control.Bind(wx.EVT_TEXT,self.effectAttribChange)
 				if (hasEffectData == True):
-					control.SetValue(appliedEffectData)	
+					control.SetValue(appliedEffectData)
 				else:
 					control.SetValue("1")
-				
+
 			#don't create a control for a hidden value
 			elif(attributeType == EffectDescriptions.VAR_HIDDEN_BYTE):
 				print "Hidden attribute detected, not creating controls."
 				continue
 			else:
 				print "Unknown control type detected!"
-			
-			
+
+
 			#We check to see if we create a contol first, if so then we
 			#create a label. this is done so a label isn't created for
 			# a hidden value
 			#effectNameLabel
 			label = wx.StaticText(self.effectAttributesPanel, label = curAttribute[EffectDescriptions.INDEX_NAME], pos = (20,yPos), size=(100,50))
-		
 
-			yPos += 40 
-			
-			
+
+			yPos += 40
+
+
 			self.lastAttributeControls.append(label)
 			self.lastAttributeControls.append(control)
 			print "last append: " + str(len(self.lastAttributeControls))
@@ -387,7 +387,7 @@ class LedEditorFrame(wx.Frame):
 		if(hasEffectData == False):
 			self.setEffectData()
 
-	
+
 	def effectAttribChange(self,event):
 		self.setEffectData()
 
@@ -395,17 +395,17 @@ class LedEditorFrame(wx.Frame):
 	#stores the effect attributes set by gui elements
 	#in the proper effect object
 	def setEffectData(self):
-			
+
 		#get the index of the selected effect name
 		selectedIndex = self.effectNamesCombobox.GetCurrentSelection()
-		
+
 		#get reference to effect description
 		effectDescription = EffectDescriptions.Effects[selectedIndex]
 
 		reqAttributes = effectDescription["reqAttributes"]
-		
+
 		reqAttributesRange = len(reqAttributes)
-		
+
 		effectData = []
 
 		i = 0
@@ -413,7 +413,7 @@ class LedEditorFrame(wx.Frame):
 		print "attribute controls count: " + str(len(self.lastAttributeControls))
 		print self.lastAttributeControls
 		while i < reqAttributesRange:
-			
+
 			#make sure we are not dealing with a hidden attribute
 			tempAttrib = reqAttributes[i]
 			attribType = tempAttrib[EffectDescriptions.INDEX_TYPE]
@@ -434,7 +434,7 @@ class LedEditorFrame(wx.Frame):
 			i += 1
 			controlIndex += 1
 		self.currentEffectGroup.setLedEffect(self.currentSelectedLed,effectDescription['id'],effectData)
-				
+
 
 	def loadFileEvent(self,event):
 		fd = wx.FileDialog(self,style=wx.FD_OPEN,defaultDir="./songs/")
@@ -471,7 +471,7 @@ class LedEditorFrame(wx.Frame):
 		print "Saving file : " + fName
 		myFile = open(fName,"w")
 		pickle.dump(self.effectGroups,myFile)
-		myFile.close()	
+		myFile.close()
 
 
 	def exportFileEvent(self,event):
@@ -484,8 +484,8 @@ class LedEditorApp(wx.App):
 		frame.Centre();
 		frame.Show(True)
 		self.SetTopWindow(frame)
-		
-				
+
+
 		return True
 
 #init various classes
@@ -508,7 +508,7 @@ import sys
 class PlayCommandHandler:
 	def __init__(self):
 		self.paused = True;
-		self.music_started = True;	
+		self.music_started = True;
 
 	def do(self):
 		if self.music_started == True:
@@ -523,29 +523,29 @@ class PlayCommandHandler:
 			pygame.mixer.music.play();
 			self.music_started = True;
 
-class LedEditor(AppFramework):	
+class LedEditor(AppFramework):
 	led_container_rect = Rect(10,100,1000,600);
 	def __init__(self):
-		
+
 		AppFramework.__init__(self,"LED Editor",1024,768)
-		
+
 		#add a sub surface for the LedEffectContainers
 		self.led_effects_container_surface = self.screen.subsurface(LedEditor.led_container_rect);
-		
+
 		self.effects_manager = LedEffectsContainerManager(self.led_effects_container_surface)
-		
+
 		#Add buttons to the screen
 		playButton = MyButton(20,20,50,50,PlayCommandHandler())
 		self.addButton(playButton);
 		playButton.draw(self.screen)
-			
-		
+
+
 		self.effectButtonMatrix = []
 		pygame.mixer.music.load("mt.mp3");
 		pygame.mixer.music.rewind();
 		pygame.mixer.music.play();
 		pygame.mixer.music.pause();
-		self.container_position = 0;	
+		self.container_position = 0;
 
 	def handle_mouse_click(self,(x,y)):
 		#pass the click to the effects manager handler
@@ -558,15 +558,15 @@ class LedEditor(AppFramework):
 	def handleKeyDown(self, event):
 		if event.key == K_1:
 			cur_time =  pygame.mixer.music.get_pos();
-			
+
 			#round cur_time to tens place
-			timeDivisionScale = 10;	
+			timeDivisionScale = 10;
 			remainderTime = cur_time % timeDivisionScale;
 			if remainderTime >= 5:
 				cur_time += timeDivisionScale - remainderTime
 			else:
 				cur_time -= remainderTime
-	
+
 			"""
 			print "Cur time is: " + str(cur_time)
 			curTimeCount = cur_time / timeDivisionScale;
@@ -574,7 +574,7 @@ class LedEditor(AppFramework):
 			x = (curTimeCount % 700);
 			y += 300;
 			print "Led 1 at " + str(curTimeCount);
-			pygame.draw.rect( 
+			pygame.draw.rect(
 				self.screen,
 				Color(0,0,0),
 				Rect(x,y,5,10)
@@ -596,7 +596,7 @@ while not done:
 			if e.type is QUIT:
 				done = True
 			elif e.type is KEYDOWN:
-				if e.key is K_ESCAPE: 
+				if e.key is K_ESCAPE:
 					done = True
 				else:
 					ledEditor.handleKeyDown(e)
@@ -613,7 +613,7 @@ while not done:
 """This is how the instruction is broken down
 \0xff -> start of effect group packet
 \0xtt\0xtt - delta time
-\0xLL\0xOP[\0xDD\0XDD...] - LL = led number, op = effect number, DD = effect 
+\0xLL\0xOP[\0xDD\0XDD...] - LL = led number, op = effect number, DD = effect
 data bytes
 
 if a led's function is just to continue it is not included
@@ -625,7 +625,7 @@ for item in containers:
 	deltaTime = Utils.short_to_hex((item.getTime() - oldTime)/10)
 	#print "Delta time is: " + str((item.getTime() - oldTime))
 	ledEffectsInstructions = item.getLedEffectsInstructions()
-	print "0xff," + deltaTime + ledEffectsInstructions + "0xff," 
+	print "0xff," + deltaTime + ledEffectsInstructions + "0xff,"
 	#print str(item.getTime() - oldTime)
 	oldTime = item.getTime()
 print "0x00,"
