@@ -1,0 +1,101 @@
+
+notes:
+Hex values: ff=255, 7d=125,  32=50, 25=19, 16=10, 15=f, 9=9
+LED numbers:
+0x00=Left Index
+0x01=Left Middle
+0x02=Left Ring
+0x03=Left Pinky
+0x04=Left Palm
+0x05=Left Thumb
+0x06=Right Thumb
+0x07=Right Palm
+0x08=Right Pinky
+0x09=Right Ring
+0x0a=Right Middle
+0x0b=Right Index
+
+0x03=Left Pinky
+0x02=Left Ring
+0x01=Left Middle
+0x00=Left Index
+0x05=Left Thumb
+0x04=Left Palm
+0x07=Right Palm
+0x06=Right Thumb
+0x0b=Right Index
+0x0a=Right Middle
+0x09=Right Ring
+0x08=Right Pinky
+
+
+0x70,0x17,  = Set header
+
+solid red:
+0x00,0x09,0xff,0x00,0x00,0x00,0x00,0x00,
+0x00, = LED number (0-11)
+     0x09, = Mode type?  (09=solid, 08=strobe, 03=Single Color PWM, 04=, 05=, 06=, 07=)
+          0xff, = color red
+               0x00, = unknown, always 00 thus far.
+                    0x00, = color green
+                         0x00, = color red
+                              0x00, = color blue
+                                   0x00, = color red
+
+Rainbow Strobe (Red for 2x, Yellow for 1x, Green for 1x, Aqua 1x, Blue 1x, Purple 1x, Black x38, Black x1)
+0x01, = LED number (0-11)
+     0x08, = Mode Type (08=strobe)
+          0x08,
+               0x00,
+                    0xff,
+                         0x00,
+                              0x00,
+                                   0x00,
+                                        0x00,
+                                             0x00,
+                                                  0x01,
+                                                       0x00,
+                                                            0xff,
+                                                                 0x00,
+                                                                      0xff,
+                                                                           0x00,
+                                                                                0x00,
+                                                                                     0x00,
+                                                                                          0x01,
+                                                                                               0x00,
+                                                                                                    0x00,
+                                                                                                         0x00,
+                                                                                                              0xff,
+                                                                                                                   0x00,
+                                                                                                                        0x00,
+                                                                                                                             0x00,
+                                                                                                                                  0x01,
+                                                                                                                                       0x00,
+                                                                                                                                            0x00,0x00,0xff,0x00,0xff,0x00,0x01,0x00,0x00,0x00,0x00,0x00,0xff,0x00,0x01,0x00,0xff,0x00,0x00,0x00,0xff,0x00,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x26,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x00,
+
+2 segment strobe (white for 1x, black for 2x)
+0x02,0x08,0x02,0x00,0xff,0x00,0xff,0x00,0xff,0x00,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x02,0x00,
+0x02, = LED Number
+     0x08, = Mode Type (08=strobe)
+          0x02, = Number of segments
+               0x00, = unknown
+                    0xff, = color red
+                         0x00, = unknown
+                              0xff, = color green
+                                   0x00, = unknown
+                                        0xff, = color blue
+                                             0x00, = unknown
+                                                  0x01, =multiplier (5ms)
+                                                       0x00, = unknown
+                                                            0x00, = color red
+                                                                 0x00, = unknown
+                                                                      0x00, = color green
+                                                                           0x00, = unknown
+                                                                                0x00, =color blue
+                                                                                     0x00, = unknown
+                                                                                          0x02, = multiplier (5ms)
+                                                                                               0x00, = unknown  (termination?)
+
+
+2 segment stribbon
+0x02,0x08,0x02,0x00,0xff,0x00,0x00,0x00,0x00,0x00,0x0a,0x00,0xff,0x00,0x00,0x00,0xff,0x00,0x02,0x00,

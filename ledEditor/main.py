@@ -86,16 +86,6 @@ class LedEditorFrame(wx.Frame):
 		self.effectNamesCombobox = wx.ComboBox(self.effectAttributesPanel, choices=effectNames, pos=(0,0), size =(300,25))
 		self.effectNamesCombobox.Bind(wx.EVT_COMBOBOX,self.effectSelected)
 
-		'''
-		#box displaying color
-		self.colorPreview = wx.Panel(self,-1,wx.Point(0,300))
-		self.colorPreview.SetBackgroundColour(wx.Colour(255,0,0))
-
-		#Color scroll bar
-		blueScrollBar = wx.ScrollBar(self,-1,wx.Point(100,400),wx.Size(100,100))
-		blueScrollBar.SetScrollbar(wx.HORIZONTAL,0,255,255,255);
-		'''
-
 	def addTimeBtnClick(self,event):
 		selectedIndex = self.timeStampListbox.GetSelection()
 		if(selectedIndex == wx.NOT_FOUND):
@@ -212,7 +202,6 @@ class LedEditorFrame(wx.Frame):
 		if( self.VerifyTime(timeVal) == False):
 			wx.MessageBox("Invalid time. Valid time ex: 52:01 001ms")
 			return
-
 
 		#find the appropriate spot for the time value in the list
 		#splits keeps splitting time list in half, and repeats
