@@ -1,37 +1,34 @@
+Notes:
 
-notes:
-Hex values: ff=255, 7d=125,  32=50, 25=19, 16=10, 15=f, 9=9
-LED numbers:
-0x00=Left Index
-0x01=Left Middle
-0x02=Left Ring
-0x03=Left Pinky
+Hex values:
+ff=255,
+7d=125,
+32=50,
+19=25,
+0c=12,
+06=6,
+03=3
+
+LED Finger Assignment:
+0x00=Left
+0x01=Left
+0x02=Left
+0x03=Left
+
 0x04=Left Palm
 0x05=Left Thumb
 0x06=Right Thumb
 0x07=Right Palm
-0x08=Right Pinky
-0x09=Right Ring
-0x0a=Right Middle
-0x0b=Right Index
 
-0x03=Left Pinky
-0x02=Left Ring
-0x01=Left Middle
-0x00=Left Index
-0x05=Left Thumb
-0x04=Left Palm
-0x07=Right Palm
-0x06=Right Thumb
-0x0b=Right Index
-0x0a=Right Middle
-0x09=Right Ring
-0x08=Right Pinky
+0x08=Right
+0x09=Right
+0x0a=Right
+0x0b=Right
 
 
 0x70,0x17,  = Set header
 
-solid red:
+Solid Red:
 0x00,0x09,0xff,0x00,0x00,0x00,0x00,0x00,
 0x00, = LED number (0-11)
      0x09, = Mode type?  (09=solid, 08=strobe, 03=Single Color PWM, 04=, 05=, 06=, 07=)
@@ -42,36 +39,25 @@ solid red:
                               0x00, = color blue
                                    0x00, = color red
 
-Rainbow Strobe (Red for 2x, Yellow for 1x, Green for 1x, Aqua 1x, Blue 1x, Purple 1x, Black x38, Black x1)
-0x01, = LED number (0-11)
-     0x08, = Mode Type (08=strobe)
-          0x08,
-               0x00,
-                    0xff,
-                         0x00,
-                              0x00,
-                                   0x00,
-                                        0x00,
-                                             0x00,
-                                                  0x01,
-                                                       0x00,
-                                                            0xff,
-                                                                 0x00,
-                                                                      0xff,
-                                                                           0x00,
-                                                                                0x00,
-                                                                                     0x00,
-                                                                                          0x01,
-                                                                                               0x00,
-                                                                                                    0x00,
-                                                                                                         0x00,
-                                                                                                              0xff,
-                                                                                                                   0x00,
-                                                                                                                        0x00,
-                                                                                                                             0x00,
-                                                                                                                                  0x01,
-                                                                                                                                       0x00,
-                                                                                                                                            0x00,0x00,0xff,0x00,0xff,0x00,0x01,0x00,0x00,0x00,0x00,0x00,0xff,0x00,0x01,0x00,0xff,0x00,0x00,0x00,0xff,0x00,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x26,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x00,
+Two Color Fade Solid
+0x0b,0x04,0xff,0x00,0x00,0x00,0x00,0x00,0xff,0x00,0x7d,0x00,0x00,0x00,0x0a,0x00,
+0x0a, = LED Number
+     0x05, = Mode Type (03=Two Color Fade PWM)
+          0xff, = color red
+               0x00, = unknown
+                    0x00, = color green
+                         0x00, = unknown
+                              0x00, = color blue
+                                   0x00, = unknown
+                                        0xff, = color red
+                                             0x00, = unknown
+                                                  0x7d, = color green
+                                                       0x00, = unknown
+                                                            0x00, = color blue
+                                                                 0x00, = unknown
+                                                                      0x0a, = # of 10ms steps for fade
+                                                                           0x00, = unknown
+
 
 2 segment strobe (white for 1x, black for 2x)
 0x02,0x08,0x02,0x00,0xff,0x00,0xff,0x00,0xff,0x00,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x02,0x00,
@@ -96,6 +82,40 @@ Rainbow Strobe (Red for 2x, Yellow for 1x, Green for 1x, Aqua 1x, Blue 1x, Purpl
                                                                                           0x02, = multiplier (5ms)
                                                                                                0x00, = unknown  (termination?)
 
+Single color PWM
+0x0b,0x03,0xff,0x00,0xff,0x00,0xff,0x00,0x01,0x00,0x02,0x00,
+0x0b, = LED Number
+     0x03, = Mode Type (03=Single Color PWM)
+          0xff, = color red
+               0x00, = unknown
+                    0xff, = color green
+                         0x00, = unknown
+                              0xff, = color blue
+                                   0x00, = unknown
+                                        0x01, = On length multiplier (2ms)
+                                             0x00, = unknown
+                                                  0x02, = Off length multiplier (2ms)
+                                                       0x00, = unknown
 
-2 segment stribbon
-0x02,0x08,0x02,0x00,0xff,0x00,0x00,0x00,0x00,0x00,0x0a,0x00,0xff,0x00,0x00,0x00,0xff,0x00,0x02,0x00,
+Two Color Fade PWM
+0x0a,0x05,0xff,0x00,0x00,0x00,0x00,0x00,0xff,0x00,0x7d,0x00,0x00,0x00,0x0a,0x00,0x01,0x00,0x02,0x00,
+0x0a, = LED Number
+     0x05, = Mode Type (03=Two Color Fade PWM)
+          0xff, = color red
+               0x00, = unknown
+                    0x00, = color green
+                         0x00, = unknown
+                              0x00, = color blue
+                                   0x00, = unknown
+                                        0xff, = color red
+                                             0x00, = unknown
+                                                  0x7d, = color green
+                                                       0x00, = unknown
+                                                            0x00, = color blue
+                                                                 0x00, = unknown
+                                                                      0x0a, = # of 10ms steps for fade
+                                                                           0x00, = unknown
+                                                                                0x01, = On length multiplier (2ms)
+                                                                                     0x00, = unknown
+                                                                                          0x02, = Off length multiplier (2ms)
+                                                                                               0x00, = unknown
