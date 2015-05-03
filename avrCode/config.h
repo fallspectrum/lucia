@@ -1,3 +1,4 @@
+
 //Clock cycle count used to time program
 //The atmega128 runs at 16mhz
 //A prescalar value of 8 is
