@@ -168,7 +168,7 @@ LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x31a6
+.text           0x00000000     0x562c
  *(.vectors)
  .vectors       0x00000000       0x8c c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr51/crtm128.o
                 0x00000000                __vectors
@@ -176,43 +176,42 @@ LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a
  *(.vectors)
  *(.progmem.gcc*)
  *(.progmem*)
- .progmem.data  0x0000008c      0x6a9 song_instructions.o
+ .progmem.data  0x0000008c     0x2b30 song_instructions.o
                 0x0000008c                song_instructions
-                0x00000736                . = ALIGN (0x2)
- *fill*         0x00000735        0x1 00
-                0x00000736                __trampolines_start = .
+                0x00002bbc                . = ALIGN (0x2)
+                0x00002bbc                __trampolines_start = .
  *(.trampolines)
- .trampolines   0x00000736        0x0 linker stubs
+ .trampolines   0x00002bbc        0x0 linker stubs
  *(.trampolines*)
-                0x00000736                __trampolines_end = .
+                0x00002bbc                __trampolines_end = .
  *(.jumptables)
  *(.jumptables*)
  *(.lowtext)
  *(.lowtext*)
-                0x00000736                __ctors_start = .
+                0x00002bbc                __ctors_start = .
  *(.ctors)
-                0x00000736                __ctors_end = .
-                0x00000736                __dtors_start = .
+                0x00002bbc                __ctors_end = .
+                0x00002bbc                __dtors_start = .
  *(.dtors)
-                0x00000736                __dtors_end = .
+                0x00002bbc                __dtors_end = .
  SORT(*)(.ctors)
  SORT(*)(.dtors)
  *(.init0)
- .init0         0x00000736        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr51/crtm128.o
-                0x00000736                __init
+ .init0         0x00002bbc        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr51/crtm128.o
+                0x00002bbc                __init
  *(.init0)
  *(.init1)
  *(.init1)
  *(.init2)
- .init2         0x00000736        0xc c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr51/crtm128.o
+ .init2         0x00002bbc        0xc c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr51/crtm128.o
  *(.init2)
  *(.init3)
  *(.init3)
  *(.init4)
- .init4         0x00000742       0x1a c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr51/crtm128.o
-                0x00000742                __do_copy_data
- .init4         0x0000075c       0x10 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_clear_bss.o)
-                0x0000075c                __do_clear_bss
+ .init4         0x00002bc8       0x1a c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr51/crtm128.o
+                0x00002bc8                __do_copy_data
+ .init4         0x00002be2       0x10 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_clear_bss.o)
+                0x00002be2                __do_clear_bss
  *(.init4)
  *(.init5)
  *(.init5)
@@ -223,124 +222,124 @@ LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x0000076c        0x8 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr51/crtm128.o
+ .init9         0x00002bf2        0x8 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr51/crtm128.o
  *(.init9)
  *(.text)
- .text          0x00000774        0x4 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr51/crtm128.o
-                0x00000774                __vector_22
-                0x00000774                __vector_28
-                0x00000774                __vector_1
-                0x00000774                __vector_32
-                0x00000774                __vector_34
-                0x00000774                __vector_24
-                0x00000774                __vector_12
-                0x00000774                __bad_interrupt
-                0x00000774                __vector_6
-                0x00000774                __vector_31
-                0x00000774                __vector_3
-                0x00000774                __vector_23
-                0x00000774                __vector_30
-                0x00000774                __vector_25
-                0x00000774                __vector_11
-                0x00000774                __vector_13
-                0x00000774                __vector_17
-                0x00000774                __vector_19
-                0x00000774                __vector_7
-                0x00000774                __vector_27
-                0x00000774                __vector_5
-                0x00000774                __vector_33
-                0x00000774                __vector_4
-                0x00000774                __vector_9
-                0x00000774                __vector_2
-                0x00000774                __vector_21
-                0x00000774                __vector_15
-                0x00000774                __vector_29
-                0x00000774                __vector_8
-                0x00000774                __vector_26
-                0x00000774                __vector_14
-                0x00000774                __vector_10
-                0x00000774                __vector_16
-                0x00000774                __vector_18
-                0x00000774                __vector_20
- .text          0x00000778      0x318 test3.o
-                0x00000778                doEffects
-                0x00000818                main
- .text          0x00000a90     0x1442 effects.o
-                0x0000102a                blinkEffect
-                0x00000b6e                ledOnEffect
-                0x00001134                resetFadeBetweenColorsWithPwm
-                0x00000cb8                fadeBetweenColors
-                0x00000a90                resetLedOnEffect
-                0x00000ab0                lightBeamEffect
-                0x00001978                fadeBetween3ColorsWithScalingPwmEffect
-                0x00000b5c                ledOffEffect
-                0x0000143a                resetFadeBetween3ColorsWithScalingPwmEffect
-                0x0000119c                fadeBetweenColorsWithPwm
-                0x00001272                resetFadeBetweenColorsWithScalingPwmEffect
-                0x00000bba                pwmEffect
-                0x00000a96                resetDoNothingEffect
-                0x00000b82                resetPwmEffect
-                0x00000a92                resetLedOffEffect
-                0x00000a98                resetLightBeamEffect
-                0x00000a94                doNothingEffect
-                0x000010b4                resetBlinkEffect
-                0x000015ae                fadeBetweenColorsWithScalingPwmEffect
-                0x0000101a                resetFadeBetweenColorsEffect
- .text          0x00001ed2      0x4ca instruction_decoder.o
-                0x000022fc                getLastGroup
-                0x0000237e                initDecoder
-                0x00002260                getPreviousGroup
-                0x00001f00                copyFromFlash
-                0x00001f2a                getInstructionGroup
-                0x0000232a                getNextGroup
-                0x00001ee8                readShortFromFlash
-                0x00001ed2                readCharFromFlash
- .text          0x0000239c      0x25c utils.o
-                0x000025a6                copy_data
-                0x00002596                waitForTimer
-                0x000025d6                copy_short_data
-                0x000023b0                setRGBColor
-                0x00002430                displayColors
-                0x000023e4                getRGBColor
-                0x000024bc                red60BPM
-                0x0000239c                abs
- .text          0x000025f8        0x0 song_instructions.o
- .text          0x000025f8        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_exit.o)
- .text          0x000025f8        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_clear_bss.o)
- .text          0x000025f8      0x354 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_addsub_sf.o)
-                0x00002890                __subsf3
-                0x000028f2                __addsf3
- .text          0x0000294c      0x1f4 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_mul_sf.o)
-                0x0000294c                __mulsf3
- .text          0x00002b40      0x158 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_div_sf.o)
-                0x00002b40                __divsf3
- .text          0x00002c98       0xbc c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_si_to_sf.o)
-                0x00002c98                __floatsisf
- .text          0x00002d54       0xa8 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_sf_to_si.o)
-                0x00002d54                __fixsfsi
- .text          0x00002dfc        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_thenan_sf.o)
- .text          0x00002dfc        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_prologue.o)
- .text          0x00002dfc        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_epilogue.o)
- .text          0x00002dfc       0x9e c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_clzsi2.o)
-                0x00002dfc                __clzsi2
- .text          0x00002e9a      0x1aa c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_pack_sf.o)
-                0x00002e9a                __pack_f
- .text          0x00003044       0xf0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_unpack_sf.o)
-                0x00003044                __unpack_f
- .text          0x00003134        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_clz.o)
-                0x00003134                . = ALIGN (0x2)
+ .text          0x00002bfa        0x4 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr51/crtm128.o
+                0x00002bfa                __vector_22
+                0x00002bfa                __vector_28
+                0x00002bfa                __vector_1
+                0x00002bfa                __vector_32
+                0x00002bfa                __vector_34
+                0x00002bfa                __vector_24
+                0x00002bfa                __vector_12
+                0x00002bfa                __bad_interrupt
+                0x00002bfa                __vector_6
+                0x00002bfa                __vector_31
+                0x00002bfa                __vector_3
+                0x00002bfa                __vector_23
+                0x00002bfa                __vector_30
+                0x00002bfa                __vector_25
+                0x00002bfa                __vector_11
+                0x00002bfa                __vector_13
+                0x00002bfa                __vector_17
+                0x00002bfa                __vector_19
+                0x00002bfa                __vector_7
+                0x00002bfa                __vector_27
+                0x00002bfa                __vector_5
+                0x00002bfa                __vector_33
+                0x00002bfa                __vector_4
+                0x00002bfa                __vector_9
+                0x00002bfa                __vector_2
+                0x00002bfa                __vector_21
+                0x00002bfa                __vector_15
+                0x00002bfa                __vector_29
+                0x00002bfa                __vector_8
+                0x00002bfa                __vector_26
+                0x00002bfa                __vector_14
+                0x00002bfa                __vector_10
+                0x00002bfa                __vector_16
+                0x00002bfa                __vector_18
+                0x00002bfa                __vector_20
+ .text          0x00002bfe      0x318 test3.o
+                0x00002bfe                doEffects
+                0x00002c9e                main
+ .text          0x00002f16     0x1442 effects.o
+                0x000034b0                blinkEffect
+                0x00002ff4                ledOnEffect
+                0x000035ba                resetFadeBetweenColorsWithPwm
+                0x0000313e                fadeBetweenColors
+                0x00002f16                resetLedOnEffect
+                0x00002f36                lightBeamEffect
+                0x00003dfe                fadeBetween3ColorsWithScalingPwmEffect
+                0x00002fe2                ledOffEffect
+                0x000038c0                resetFadeBetween3ColorsWithScalingPwmEffect
+                0x00003622                fadeBetweenColorsWithPwm
+                0x000036f8                resetFadeBetweenColorsWithScalingPwmEffect
+                0x00003040                pwmEffect
+                0x00002f1c                resetDoNothingEffect
+                0x00003008                resetPwmEffect
+                0x00002f18                resetLedOffEffect
+                0x00002f1e                resetLightBeamEffect
+                0x00002f1a                doNothingEffect
+                0x0000353a                resetBlinkEffect
+                0x00003a34                fadeBetweenColorsWithScalingPwmEffect
+                0x000034a0                resetFadeBetweenColorsEffect
+ .text          0x00004358      0x4ca instruction_decoder.o
+                0x00004782                getLastGroup
+                0x00004804                initDecoder
+                0x000046e6                getPreviousGroup
+                0x00004386                copyFromFlash
+                0x000043b0                getInstructionGroup
+                0x000047b0                getNextGroup
+                0x0000436e                readShortFromFlash
+                0x00004358                readCharFromFlash
+ .text          0x00004822      0x25c utils.o
+                0x00004a2c                copy_data
+                0x00004a1c                waitForTimer
+                0x00004a5c                copy_short_data
+                0x00004836                setRGBColor
+                0x000048b6                displayColors
+                0x0000486a                getRGBColor
+                0x00004942                red60BPM
+                0x00004822                abs
+ .text          0x00004a7e        0x0 song_instructions.o
+ .text          0x00004a7e        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_exit.o)
+ .text          0x00004a7e        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_clear_bss.o)
+ .text          0x00004a7e      0x354 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_addsub_sf.o)
+                0x00004d16                __subsf3
+                0x00004d78                __addsf3
+ .text          0x00004dd2      0x1f4 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_mul_sf.o)
+                0x00004dd2                __mulsf3
+ .text          0x00004fc6      0x158 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_div_sf.o)
+                0x00004fc6                __divsf3
+ .text          0x0000511e       0xbc c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_si_to_sf.o)
+                0x0000511e                __floatsisf
+ .text          0x000051da       0xa8 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_sf_to_si.o)
+                0x000051da                __fixsfsi
+ .text          0x00005282        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_thenan_sf.o)
+ .text          0x00005282        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_prologue.o)
+ .text          0x00005282        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_epilogue.o)
+ .text          0x00005282       0x9e c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_clzsi2.o)
+                0x00005282                __clzsi2
+ .text          0x00005320      0x1aa c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_pack_sf.o)
+                0x00005320                __pack_f
+ .text          0x000054ca       0xf0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_unpack_sf.o)
+                0x000054ca                __unpack_f
+ .text          0x000055ba        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_clz.o)
+                0x000055ba                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x00003134        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_exit.o)
- .text.libgcc   0x00003134        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_clear_bss.o)
- .text.libgcc   0x00003134       0x38 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_prologue.o)
-                0x00003134                __prologue_saves__
- .text.libgcc   0x0000316c       0x36 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_epilogue.o)
-                0x0000316c                __epilogue_restores__
-                0x000031a2                . = ALIGN (0x2)
+ .text.libgcc   0x000055ba        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_exit.o)
+ .text.libgcc   0x000055ba        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_clear_bss.o)
+ .text.libgcc   0x000055ba       0x38 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_prologue.o)
+                0x000055ba                __prologue_saves__
+ .text.libgcc   0x000055f2       0x36 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_epilogue.o)
+                0x000055f2                __epilogue_restores__
+                0x00005628                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000031a2        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_exit.o)
-                0x000031a2                exit
-                0x000031a2                _exit
+ .fini9         0x00005628        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_exit.o)
+                0x00005628                exit
+                0x00005628                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -359,11 +358,11 @@ LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000031a2        0x4 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_exit.o)
+ .fini0         0x00005628        0x4 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a(_exit.o)
  *(.fini0)
-                0x000031a6                _etext = .
+                0x0000562c                _etext = .
 
-.data           0x00800100      0x110 load address 0x000031a6
+.data           0x00800100      0x110 load address 0x0000562c
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800100        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr51/crtm128.o
@@ -447,8 +446,8 @@ LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr51\libgcc.a
                 0x00800cf5                effectGroupSizes
                 0x00800ef3                sramEffectDataPtr
                 0x00800ef5                PROVIDE (__bss_end, .)
-                0x000031a6                __data_load_start = LOADADDR (.data)
-                0x000032b6                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0000562c                __data_load_start = LOADADDR (.data)
+                0x0000573c                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800ef5        0x0
                 0x00800ef5                PROVIDE (__noinit_start, .)
