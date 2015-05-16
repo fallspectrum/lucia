@@ -1,6 +1,3 @@
-Pending...
+Lucia - For programming LED lighting effects into an Atmega128.
 
-This application uses sdl. If you get an error on linux make sure
-SDL supports the your sound system (ex: libsdl1.2debian-alsa 
-supports alsa)
-
+Created by - Justin Taft
